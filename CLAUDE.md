@@ -16,7 +16,7 @@ Read the imported docs below before building or editing any page. They are the s
 | Item | Status | Where it plugs in |
 |---|---|---|
 | WhatsApp number that receives leads | Resolved: +234 704 698 3893, the only published number | `data/company.ts` `whatsappNumber` |
-| Production domain | Waiting on client | `data/company.ts` `siteUrl` |
+| Production domain | Resolved: https://citychiccleaning.com | `data/company.ts` `siteUrl` |
 | Image URLs (hero, before/after pairs, gallery, logo, OG image) | Client will supply Cloudflare links | `data/images.ts` only |
 | Image host type (Cloudflare Images or R2) | Waiting on client | `next.config.ts` loader choice |
 

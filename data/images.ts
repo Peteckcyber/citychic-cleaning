@@ -40,6 +40,8 @@ export type WorkVideo = {
   height: number;
   /** Describes the footage for screen readers. */
   label: string;
+  /** Length in seconds, for the video sitemap. */
+  durationSeconds: number;
 };
 
 /**
@@ -53,6 +55,7 @@ export const workVideos = {
     width: 720,
     height: 1280,
     label: "CityChic crew in uniform scrubbing and polishing a marble floor by hand",
+    durationSeconds: 72,
   },
   siteWalkthrough: {
     src: "/videos/site-walkthrough.mp4",
@@ -60,6 +63,7 @@ export const workVideos = {
     width: 720,
     height: 1280,
     label: "Walkthrough of a newly built property covered in construction dust, debris and paint residue",
+    durationSeconds: 66,
   },
 } satisfies Record<string, WorkVideo>;
 

@@ -3,11 +3,8 @@
  * Never retype any of these values inside a component. Import them from here.
  */
 
-/**
- * PENDING: replace with the production domain once the client confirms it.
- * The reserved .example TLD makes it obvious this is not live.
- */
-const PLACEHOLDER_SITE_URL = "https://www.citychic.example";
+/** Production domain, confirmed by the client on 2026-09-30. No trailing slash, no www. */
+const SITE_URL = "https://citychiccleaning.com";
 
 /** The company's only published line, which also receives WhatsApp leads. Digits only, no plus sign. */
 const WHATSAPP_NUMBER = "2347046983893";
@@ -30,7 +27,7 @@ export const company = {
   legalName: "CityChic Nigeria Ltd",
   rcNumber: "RC 7312822G",
   foundingYear: 2019,
-  siteUrl: PLACEHOLDER_SITE_URL,
+  siteUrl: SITE_URL,
   mission:
     "To surpass our clients' expectations by providing post-construction and deep cleaning services.",
   vision: "To become the best cleaning company in Nigeria.",

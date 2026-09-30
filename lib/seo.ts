@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { company } from "@/data/company";
-import { images } from "@/data/images";
+import { images, workPhotos } from "@/data/images";
 import { services } from "@/data/services";
+import { getOgPage } from "@/lib/og-pages";
 
 export const siteName = "CityChic Cleaning Services";
 
@@ -12,19 +13,26 @@ type BuildMetadataInput = {
   path: string;
   /** Skip the "| CityChic Cleaning Services" suffix, used on the home page. */
   absoluteTitle?: boolean;
+  /** Share card key from lib/og-pages.ts, served at /og/<key>.jpg. */
+  shareImage: string;
 };
 
-/**
- * Per-route metadata with canonical URL, Open Graph and Twitter tags.
- * Share images come from the file-based opengraph-image and twitter-image routes.
- */
+/** Open Graph image descriptor for a share card, reused by the root layout as the default. */
+export function shareImageFor(key: string) {
+  const page = getOgPage(key);
+  return { url: `/og/${page.key}.jpg`, width: 1200, height: 630, alt: page.alt, type: "image/jpeg" };
+}
+
+/** Per-route metadata with canonical URL, Open Graph and Twitter tags, and the page's share card. */
 export function buildMetadata({
   title,
   description,
   path,
   absoluteTitle = false,
+  shareImage,
 }: BuildMetadataInput): Metadata {
   const fullTitle = absoluteTitle ? title : `${title} | ${siteName}`;
+  const image = shareImageFor(shareImage);
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -37,11 +45,13 @@ export function buildMetadata({
       url: path,
       title: fullTitle,
       description,
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
+      images: [image.url],
     },
   };
 }
@@ -110,6 +120,38 @@ export function aboutPageJsonLd() {
     url: absoluteUrl("/about"),
     name: `About ${company.shortName}`,
     about: { "@id": businessId },
+  };
+}
+
+/** Service schema for one detail page, provided by the CleaningService. No price, by design. */
+export function serviceJsonLd(
+  service: { slug: string; name: string; summary: string },
+  imageSrc: string,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": absoluteUrl(`/services/${service.slug}#service`),
+    name: service.name,
+    serviceType: service.name,
+    description: service.summary,
+    url: absoluteUrl(`/services/${service.slug}`),
+    image: absoluteUrl(imageSrc),
+    areaServed: { "@type": "City", name: "Lagos" },
+    provider: { "@id": businessId },
+  };
+}
+
+/** FAQPage schema from question and answer pairs. */
+export function faqJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
   };
 }
 
@@ -187,7 +229,10 @@ export function siteJsonLd() {
   };
 
   if (images.logo.src) business.logo = absoluteUrl(images.logo.src);
-  if (images.hero.src) business.image = absoluteUrl(images.hero.src);
+  // Real job photos, so search results can show the crew and their work.
+  business.image = [workPhotos.crewTeam, workPhotos.industrialFloor, workPhotos.facilityFloorMopping].map(
+    (photo) => absoluteUrl(photo.src),
+  );
 
   return {
     "@context": "https://schema.org",

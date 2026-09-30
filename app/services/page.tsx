@@ -20,6 +20,7 @@ export const metadata = buildMetadata({
   description:
     "Post-construction, deep cleaning, fogging disinfection, home cleaning plans and facility maintenance in Lagos. See what is included and get a free quote.",
   path: "/services",
+  shareImage: "services",
 });
 
 const crumbs: Crumb[] = [

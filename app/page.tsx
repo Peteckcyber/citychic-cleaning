@@ -12,6 +12,7 @@ export const metadata = buildMetadata({
     "Post-construction, deep cleaning and fogging disinfection for Lagos homes, offices and new builds. Vetted crews since 2019. Get a free quote on WhatsApp.",
   path: "/",
   absoluteTitle: true,
+  shareImage: "home",
 });
 
 export default function HomePage() {

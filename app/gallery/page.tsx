@@ -18,6 +18,7 @@ export const metadata = buildMetadata({
   description:
     "Real photos and videos from CityChic jobs: post-construction cleans, deep cleaning and fogging disinfection by our Lagos crews. See the work, then get a quote.",
   path: "/gallery",
+  shareImage: "gallery",
 });
 
 const crumbs: Crumb[] = [

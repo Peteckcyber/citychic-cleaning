@@ -18,9 +18,10 @@ import { aboutPageJsonLd, breadcrumbJsonLd, buildMetadata, type Crumb } from "@/
 export const metadata = buildMetadata({
   title: "About CityChic | Lagos Cleaning Company Since 2019",
   description:
-    "Meet CityChic Cleaning Services, a Lagos cleaning company since 2019. Our mission, core values, quality checks and how we vet and train every crew.",
+    "Meet CityChic Cleaning Services, a Lagos cleaning company since 2019. Our mission, core values, quality checks and the standards every crew works to.",
   path: "/about",
   absoluteTitle: true,
+  shareImage: "about",
 });
 
 const crumbs: Crumb[] = [

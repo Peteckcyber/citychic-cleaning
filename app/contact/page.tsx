@@ -23,6 +23,7 @@ export const metadata = buildMetadata({
     "Call, WhatsApp or email CityChic Cleaning Services in Magodo Phase 2, Lagos. Open Monday to Saturday, 8am to 6pm. Send us your job and get a free quote.",
   path: "/contact",
   absoluteTitle: true,
+  shareImage: "contact",
 });
 
 const crumbs: Crumb[] = [

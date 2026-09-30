@@ -5,7 +5,7 @@ import { company } from "@/data/company";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { serializeJsonLd, siteJsonLd, siteName } from "@/lib/seo";
+import { serializeJsonLd, shareImageFor, siteJsonLd, siteName } from "@/lib/seo";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -28,17 +28,24 @@ export const metadata: Metadata = {
   creator: company.legalName,
   publisher: company.legalName,
   category: "Cleaning Services",
+  // Fallback share card for any page that does not set its own.
   openGraph: {
     type: "website",
     locale: "en_NG",
     siteName,
+    images: [shareImageFor("home")],
   },
   twitter: {
     card: "summary_large_image",
+    images: [shareImageFor("home").url],
   },
   robots: {
     index: true,
     follow: true,
+  },
+  // Google Search Console ownership check, added 2026-09-30. Keep it: removing it unverifies the site.
+  verification: {
+    google: "2s6JRpSas3bWZJEoKBF1OjtEV61R6AsF4LoQXV5d9A8",
   },
 };
 

@@ -53,6 +53,8 @@ Built 2026-09-29: PageHero with group jump links and a collage, one Section per 
 
 ## 3. Service detail `/services/[slug]` (nine static pages)
 
+Built 2026-10-01. Page content lives in `data/service-details.ts` (SEO description, photo, the "on the day" step, FAQs, related slugs). Sections: PageHero with WhatsApp quote and "Send Your Details" plus the service photo, `ServiceOverview`, `ServiceProcess` (four steps), `ServiceFaqs` (shadcn Accordion; answers use forceMount so they are in the static HTML), `RelatedServices`, `ServiceEnquiry` (ContactForm with the service preselected). JSON-LD: BreadcrumbList, Service, FAQPage. Titles use "<Service> in Lagos | CityChic".
+
 Built from `data/services.ts`. Each page has:
 - h1 with the service name and Lagos (for example "Post-Construction Cleaning in Lagos")
 - Breadcrumb: Home / Services / {name}
