@@ -1,0 +1,17 @@
+// Cloudflare Workers config: serve the static export in ./out (produced by `npm run build`).
+// Having this file stops `wrangler deploy` from auto-configuring OpenNext, which needs a
+// server build and fails on a static export.
+{
+  "name": "citychic-cleaning",
+  "compatibility_date": "2026-09-26",
+  "assets": {
+    "directory": "./out",
+    // /about serves about.html, and so on.
+    "html_handling": "auto-trailing-slash",
+    // Unknown URLs get the site's own 404 page.
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

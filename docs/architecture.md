@@ -8,9 +8,11 @@
 - lucide-react for every icon
 - react-hook-form and zod for form state and validation
 
-## Hosting: Cloudflare Pages, static export
+## Hosting: Cloudflare Workers static assets, static export
 
-- `next.config.ts` sets `output: 'export'`. The build writes plain files to `out/`, and Cloudflare Pages serves them.
+- `next.config.ts` sets `output: 'export'`. The build writes plain files to `out/`.
+- The client connected the GitHub repo to a Cloudflare **Workers** project named `citychic-cleaning` (build command `npm run build`, deploy command `npx wrangler deploy`). `wrangler.jsonc` in the repo root tells Wrangler to serve `./out` as static assets. Never delete it: without it, Wrangler auto-configures OpenNext, which needs a server build and fails with "pages-manifest.json not found".
+- Do not add `@opennextjs/cloudflare`, `open-next.config.ts` or `.dev.vars` to the repo. Cloudflare static assets allow files up to 25 MiB each.
 - There is no server at runtime. That rules out ISR, `revalidate`, route handlers that run per request, server actions, middleware, cookies and headers(). Content changes mean editing `data/` and redeploying.
 - `app/sitemap.ts`, `app/robots.ts`, `app/opengraph-image.tsx` and `app/twitter-image.tsx` must export `export const dynamic = 'force-static'`, or they return a 500 under `output: 'export'`.
 - The share image is generated at build time from `lib/og-image.tsx`. Both image routes use it.
