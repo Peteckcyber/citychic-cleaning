@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type KeyboardEvent,
+  type PointerEvent,
+} from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Expand, Images, Play, X } from "lucide-react";
 
@@ -48,6 +55,20 @@ export function isGalleryFilter(value: string | null): value is GalleryFilter {
   return filters.some((filter) => filter.value === value);
 }
 
+/** Matches Tailwind's sm and lg breakpoints: one column on phones, two on tablets, three on desktop. */
+const columnQueries = ["(min-width: 1024px)", "(min-width: 640px)"];
+
+function getColumnCount() {
+  if (window.matchMedia(columnQueries[0]).matches) return 3;
+  return window.matchMedia(columnQueries[1]).matches ? 2 : 1;
+}
+
+function subscribeToColumns(onChange: () => void) {
+  const lists = columnQueries.map((query) => window.matchMedia(query));
+  lists.forEach((list) => list.addEventListener("change", onChange));
+  return () => lists.forEach((list) => list.removeEventListener("change", onChange));
+}
+
 type GalleryViewProps = {
   filter: GalleryFilter;
   onFilterChange?: (filter: GalleryFilter) => void;
@@ -55,6 +76,7 @@ type GalleryViewProps = {
 
 export function GalleryView({ filter, onFilterChange }: GalleryViewProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const columnCount = useSyncExternalStore(subscribeToColumns, getColumnCount, () => 3);
 
   const visible =
     filter === "all" ? galleryItems : galleryItems.filter((item) => item.category === filter);
@@ -103,14 +125,26 @@ export function GalleryView({ filter, onFilterChange }: GalleryViewProps) {
         Showing {visible.length} {visible.length === 1 ? "item" : "items"} in {activeLabel}.
       </p>
 
-      {/* Masonry grid: every photo keeps its natural shape. */}
-      <ul key={filter} className="columns-1 gap-5 sm:columns-2 lg:columns-3 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-500">
-        {visible.map((item, index) => (
-          <li key={item.id} className="mb-5 break-inside-avoid">
-            <GalleryTile item={item} eager={index < 3} onOpen={() => setOpenIndex(index)} />
-          </li>
+      {/* Masonry grid: every photo keeps its natural shape, and items are dealt across the
+          columns row by row so the newest work sits at the top of every column. */}
+      <div
+        key={filter}
+        className="flex flex-col gap-5 sm:flex-row sm:items-start motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-500"
+      >
+        {Array.from({ length: columnCount }, (_, column) => (
+          // Below sm the columns dissolve into one list, and `order` keeps it in data order
+          // even before hydration picks the real column count.
+          <ul key={column} className="contents sm:flex sm:min-w-0 sm:flex-1 sm:flex-col sm:gap-5">
+            {visible.map((item, index) =>
+              index % columnCount === column ? (
+                <li key={item.id} style={{ order: index }}>
+                  <GalleryTile item={item} eager={index < 3} onOpen={() => setOpenIndex(index)} />
+                </li>
+              ) : null,
+            )}
+          </ul>
         ))}
-      </ul>
+      </div>
 
       <Lightbox
         items={visible}
@@ -167,11 +201,10 @@ function GalleryTile({
         className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"
       />
 
+      {/* Corner placement keeps the caption burned into the middle of each video poster readable. */}
       {item.type === "video" && (
-        <span className="absolute inset-0 flex items-center justify-center">
-          <span className="flex size-16 items-center justify-center rounded-full bg-white/90 text-brand shadow-xl transition-transform duration-300 group-hover:scale-110">
-            <Play className="ml-1 size-7 fill-current" aria-hidden="true" />
-          </span>
+        <span className="absolute top-4 left-4 flex size-12 items-center justify-center rounded-full bg-white/90 text-brand shadow-xl transition-transform duration-300 group-hover:scale-110">
+          <Play className="ml-0.5 size-5 fill-current" aria-hidden="true" />
         </span>
       )}
 

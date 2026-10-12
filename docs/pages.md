@@ -79,10 +79,10 @@ Built 2026-09-29 in this order: PageHero ("Built on Detail. Trusted Since 2019."
 
 ## 5. Gallery `/gallery`
 
-Built 2026-09-29, with the user's instruction that user experience comes first. It holds 15 items (13 photos, 2 videos) from two client batches; a duplicate photo in the second batch was skipped. Data lives in `data/gallery.ts` (photos and videos, each with a title, caption and optional category; add new media there). Behaviour:
-- Filter pills with counts; categories with no items are hidden (Residential stays hidden until it has media). The filter bar sticks under the header, and on mobile it scrolls sideways with a fade hint.
+Built 2026-09-29, with the user's instruction that user experience comes first. It holds 25 items (15 photos, 10 videos). The third batch (8 videos, 2 photos, added 2026-10-12) is listed first, because the user wants the newest work shown first; keep new batches at the top of the list. Data lives in `data/gallery.ts` (photos and videos, each with a title, caption and optional category; add new media there). Client originals go in the git-ignored `originals/` folder, never `public/`, and every file in `public/` must stay under Cloudflare's 25 MiB limit. Behaviour:
+- Filter pills with counts; categories with no items are hidden (Residential now has a video). The filter bar sticks under the header, and on mobile it scrolls sideways with a fade hint.
 - The active filter lives in the URL (`?category=fogging`) via `history.replaceState`, so it is instant, shareable and survives refresh. `GalleryBrowser` reads it inside a Suspense boundary whose fallback is the full "All Work" grid, so every item is in the static HTML.
-- Masonry grid (CSS columns), natural aspect ratios, shimmer until each image loads (with a check for images that load before hydration), the first three tiles load eagerly, video tiles show a play button.
+- Masonry grid, items dealt across the columns row by row so the first items sit at the top of every column, natural aspect ratios, shimmer until each image loads (with a check for images that load before hydration), the first three tiles load eagerly, video tiles show a play button.
 - Lightbox (shadcn Dialog): large view, title, caption, "n of total", previous and next buttons, arrow keys, swipe, thumbnail strip, neighbour preloading, native video controls, and a "Get a Quote for [service]" WhatsApp button mapped from the category.
 - No before/after pairs exist yet, so there are no sliders on this page; `BeforeAfterSlider` is kept for when pairs arrive.
 

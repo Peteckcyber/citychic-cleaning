@@ -40,6 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# original client videos (the site uses the web-optimised versions)
+# original client media (the site uses the web-optimised versions)
 /public/videos/work1.mp4
 /public/videos/work2.mp4
+/originals/

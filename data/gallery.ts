@@ -32,6 +32,92 @@ export type GalleryItem =
 
 /** Every piece of real job media, newest showcase first. Add new photos and videos here. */
 export const galleryItems: GalleryItem[] = [
+  /* Latest batch (October 2026), shown first. */
+  {
+    id: "compound-fogging",
+    type: "video",
+    video: workVideos.compoundFogging,
+    category: "fogging",
+    title: "Compound Fogging",
+    caption:
+      "Fogging a residential compound from the gate to the back wall, then into the open drains where pests breed.",
+  },
+  {
+    id: "glass-facade-cleaning",
+    type: "video",
+    video: workVideos.glassFacadeCleaning,
+    category: "post-construction",
+    title: "Glass Facade Cleaning",
+    caption:
+      "Two crew members on ladders working the full height of a new glass facade, frame by frame.",
+  },
+  {
+    id: "crew-uniforms-back",
+    type: "photo",
+    photo: workPhotos.crewUniformsBack,
+    title: "Crew and Kit, Ready to Go",
+    caption:
+      "A six-person crew lined up at the gate with the floor machine, vacuum and ladders for the day’s job.",
+  },
+  {
+    id: "marble-floor-machine-scrub",
+    type: "video",
+    video: workVideos.marbleFloorMachineScrub,
+    category: "post-construction",
+    title: "Marble Floor Machine Scrub",
+    caption:
+      "Footprints and site dust lifted from the marble floors of a new home, right up to the staircase.",
+  },
+  {
+    id: "residential-bedroom-clean",
+    type: "video",
+    video: workVideos.residentialBedroomClean,
+    category: "residential",
+    title: "Bedroom and Living Space Clean",
+    caption:
+      "Bed frames, TV wall units and the balcony wiped down by hand, with nothing skipped behind or underneath.",
+  },
+  {
+    id: "rug-shampoo",
+    type: "video",
+    video: workVideos.rugShampoo,
+    category: "deep-clean",
+    title: "Rug Shampoo",
+    caption: "A rotary machine working shampoo deep into a large outdoor rug.",
+  },
+  {
+    id: "window-frame-dust-blowing",
+    type: "video",
+    video: workVideos.windowFrameDustBlowing,
+    category: "post-construction",
+    title: "Window Frame Dust Removal",
+    caption:
+      "Blowing construction dust out of window frames and burglar-proof bars before the wipe-down.",
+  },
+  {
+    id: "tiled-room-scrub",
+    type: "video",
+    video: workVideos.tiledRoomScrub,
+    category: "deep-clean",
+    title: "Tiled Floor Scrub",
+    caption: "A rotary scrubber working along the edges of a stained tiled floor, wall to wall.",
+  },
+  {
+    id: "fogging-crew-intro",
+    type: "video",
+    video: workVideos.foggingCrewIntro,
+    category: "fogging",
+    title: "Fogging Crew on Site",
+    caption: "Our fogging crew arriving in uniform with the equipment ready for treatment.",
+  },
+  {
+    id: "branded-truck",
+    type: "photo",
+    photo: workPhotos.brandedTruck,
+    title: "CityChic on Display",
+    caption: "A CityChic-branded toy dump truck, a playful nod to the post-construction work we take on.",
+  },
+  /* Earlier batches. */
   {
     id: "marble-floor-scrub",
     type: "video",

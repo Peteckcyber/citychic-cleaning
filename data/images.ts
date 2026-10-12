@@ -65,6 +65,71 @@ export const workVideos = {
     label: "Walkthrough of a newly built property covered in construction dust, debris and paint residue",
     durationSeconds: 66,
   },
+  /* Second batch (October 2026). Originals are kept out of the build in /originals. */
+  compoundFogging: {
+    src: "/videos/compound-fogging.mp4",
+    poster: "/images/work/compound-fogging-poster.webp",
+    width: 720,
+    height: 1280,
+    label: "CityChic technician fogging a residential compound and its open drains with a thermal fogger",
+    durationSeconds: 85,
+  },
+  glassFacadeCleaning: {
+    src: "/videos/glass-facade-cleaning.mp4",
+    poster: "/images/work/glass-facade-cleaning-poster.webp",
+    width: 720,
+    height: 1280,
+    label: "Two CityChic crew members on ladders cleaning the glass facade of a newly built house",
+    durationSeconds: 31,
+  },
+  marbleFloorMachineScrub: {
+    src: "/videos/marble-floor-machine-scrub.mp4",
+    poster: "/images/work/marble-floor-machine-scrub-poster.webp",
+    width: 720,
+    height: 1280,
+    label: "CityChic crew machine scrubbing dusty marble floors and the staircase landing of a new home",
+    durationSeconds: 46,
+  },
+  residentialBedroomClean: {
+    src: "/videos/residential-bedroom-clean.mp4",
+    poster: "/images/work/residential-bedroom-clean-poster.webp",
+    width: 720,
+    height: 1280,
+    label: "CityChic cleaner wiping down a bed frame, TV wall unit and balcony in a family home",
+    durationSeconds: 103,
+  },
+  rugShampoo: {
+    src: "/videos/rug-shampoo.mp4",
+    poster: "/images/work/rug-shampoo-poster.webp",
+    width: 360,
+    height: 640,
+    label: "Rotary machine shampooing a green outdoor rug laid out on paving stones",
+    durationSeconds: 8,
+  },
+  windowFrameDustBlowing: {
+    src: "/videos/window-frame-dust-blowing.mp4",
+    poster: "/images/work/window-frame-dust-blowing-poster.webp",
+    width: 480,
+    height: 854,
+    label: "CityChic cleaner in a hair net and goggles blowing construction dust out of window frames",
+    durationSeconds: 7,
+  },
+  tiledRoomScrub: {
+    src: "/videos/tiled-room-scrub.mp4",
+    poster: "/images/work/tiled-room-scrub-poster.webp",
+    width: 360,
+    height: 640,
+    label: "CityChic cleaner running a rotary scrubber along the stained tiled floor of a room",
+    durationSeconds: 14,
+  },
+  foggingCrewIntro: {
+    src: "/videos/fogging-crew-intro.mp4",
+    poster: "/images/work/fogging-crew-intro-poster.webp",
+    width: 720,
+    height: 1280,
+    label: "Two CityChic crew members in blue uniforms greeting the camera beside their fogging machine",
+    durationSeconds: 21,
+  },
 } satisfies Record<string, WorkVideo>;
 
 export type WorkPhoto = SiteImage & {
@@ -166,6 +231,18 @@ export const workPhotos = {
     width: 750,
     height: 1000,
     label: "Post-Construction",
+  },
+  crewUniformsBack: {
+    src: "/images/work/crew-uniforms-back.webp",
+    alt: "Six CityChic crew members in pink branded shirts facing a gate, with a floor machine, vacuum and ladders beside them",
+    width: 750,
+    height: 1000,
+  },
+  brandedTruck: {
+    src: "/images/work/branded-truck.webp",
+    alt: "Yellow toy dump truck carrying a CityChic Cleaning Services sticker, with more branded stickers behind it",
+    width: 1000,
+    height: 648,
   },
   /** Sister company photo. Only ever shown inside the road marking banner, which links out. */
   roadMarkingSurvey: {
